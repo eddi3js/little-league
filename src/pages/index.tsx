@@ -1,8 +1,9 @@
 import type { NextPage } from "next";
 import Head from "next/head";
-import { signIn, signOut, useSession } from "next-auth/react";
+import { getSession, signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { Routes } from "@/utils/constants";
+import { AuthContext } from "@/utils/authPage";
 
 const Home: NextPage = () => {
   return (
@@ -19,6 +20,21 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+export async function getServerSideProps(context: AuthContext) {
+  const session = await getSession(context);
+  if (session) {
+    return {
+      redirect: {
+        destination: Routes.Home,
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: {},
+  };
+}
 
 const AuthShowcase: React.FC = () => {
   const { data: sessionData } = useSession();
