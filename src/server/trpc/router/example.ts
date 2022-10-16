@@ -12,16 +12,4 @@ export const exampleRouter = router({
   getAll: publicProcedure.query(({ ctx }) => {
     return ctx.prisma.example.findMany();
   }),
-  getOne: publicProcedure
-    .input(z.object({ id: z.number() }))
-    .query(({ input, ctx }) => {
-      return ctx.prisma.member.findUnique({
-        where: {
-          id: input.id.toString(),
-        },
-        include: {
-          Team: true
-        }
-      });
-    }
 });
