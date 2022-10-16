@@ -12,8 +12,18 @@ const Home: NextPage = () => {
         <title>Leagues.run</title>
       </Head>
       <main className="container mx-auto flex min-h-screen flex-col items-center justify-center p-4">
-        <h1>Homepage</h1>
-        <AuthShowcase />
+        <div className="card w-full bg-base-200 shadow md:w-80">
+          <div className="card-content p-6 py-3">
+            <h1 className="text-2xl font-bold">Leagues.run</h1>
+            <p className="my-3 text-sm">Login to your free account.</p>
+            <button
+              onClick={() => signIn()}
+              className="btn btn-outline btn-ghost w-full bg-white capitalize hover:bg-secondary hover:text-white"
+            >
+              Login with Discord
+            </button>
+          </div>
+        </div>
       </main>
     </>
   );
@@ -35,28 +45,3 @@ export async function getServerSideProps(context: AuthContext) {
     props: {},
   };
 }
-
-const AuthShowcase: React.FC = () => {
-  const { data: sessionData } = useSession();
-
-  return (
-    <div className="flex flex-col items-center justify-center gap-2">
-      {sessionData && (
-        <Link href={Routes.Home}>
-          <button className="btn btn-secondary my-5">Go to App</button>
-        </Link>
-      )}
-      {sessionData && (
-        <p className="text-2xl text-blue-500">
-          Logged in as {sessionData?.user?.name}
-        </p>
-      )}
-      <button
-        className="btn btn-info"
-        onClick={sessionData ? () => signOut() : () => signIn()}
-      >
-        {sessionData ? "Sign out" : "Sign in"}
-      </button>
-    </div>
-  );
-};
