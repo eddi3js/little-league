@@ -1,3 +1,4 @@
+import { Routes } from "@/utils/constants";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
@@ -38,17 +39,17 @@ const playerSidebar = [
   {
     name: "Player Profile",
     icon: "profile",
-    href: "/app",
+    href: Routes.Home,
   },
   {
     name: "Schedule",
     icon: "schedule",
-    href: "/schedule",
+    href: Routes.Schedule,
   },
   {
     name: "Messages",
     icon: "message",
-    href: "/messages",
+    href: Routes.Messages,
   },
 ];
 
