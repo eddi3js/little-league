@@ -51,6 +51,7 @@ model User {
     image         String?
     accounts      Account[]
     sessions      Session[]
+    Member        Member[]
 }
 
 model VerificationToken {
@@ -59,4 +60,58 @@ model VerificationToken {
     expires    DateTime
 
     @@unique([identifier, token])
+}
+
+model Team {
+    id       String    @id @default(cuid())
+    name     String
+    members  Member[]
+    events   Event[]
+    messages Message[]
+}
+
+model Member {
+    id     String  @id @default(cuid())
+    name   String
+    user   User    @relation(fields: [userId], references: [id])
+    userId String
+    role   String
+    stats  Stats[]
+    Team   Team?   @relation(fields: [teamId], references: [id])
+    teamId String?
+}
+
+model Event {
+    id        String    @id @default(cuid())
+    homeScore Int
+    awayScore Int
+    date      DateTime
+    type      String
+    status    String
+    location  String
+    rsvp      Json
+    Team      Team?     @relation(fields: [teamId], references: [id])
+    teamId    String?
+    Message   Message[]
+}
+
+model Stats {
+    id           String   @id @default(cuid())
+    type         String
+    value        Int
+    inningNumber Int
+    inningType   String
+    member       Member   @relation(fields: [memberId], references: [id])
+    memberId     String
+    createdAt    DateTime @default(now())
+}
+
+model Message {
+    id        String   @id @default(cuid())
+    content   String
+    createdAt DateTime @default(now())
+    event     Event    @relation(fields: [eventId], references: [id])
+    eventId   String
+    Team      Team?    @relation(fields: [teamId], references: [id])
+    teamId    String?
 }
