@@ -44,7 +44,7 @@ const playerSidebar = [
   {
     name: "Schedule",
     icon: "schedule",
-    href: Routes.Schedule,
+    href: Routes.Events,
   },
   {
     name: "Messages",
