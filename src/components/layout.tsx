@@ -11,7 +11,12 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
       <Navbar />
       <div className="flex flex-1 flex-col-reverse items-stretch md:flex-row">
         <Sidebar />
-        <div className="flex flex-1 px-6 py-4">{children}</div>
+        <div
+          className={`} mx-auto mt-6 flex h-fit w-full max-w-2xl flex-1 rounded bg-base-100 p-4 px-6
+          md:shadow`}
+        >
+          {children}
+        </div>
       </div>
     </>
   );

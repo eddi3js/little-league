@@ -3,4 +3,6 @@ export enum Routes {
   Home = "/app",
   Messages = "/app/messages",
   Events = "/app/events",
+  Teams = "/app/teams",
+  Members = "/app/members",
 }
